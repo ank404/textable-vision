@@ -31,4 +31,5 @@ export interface UploadState {
   error: string | null;
   data: OcrResponse | null;
   file: DocumentFile | null;
+  uploadProgress?: number;
 }

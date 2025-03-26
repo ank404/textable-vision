@@ -4,7 +4,7 @@ import axios from 'axios';
 import { OcrResponse, DocumentFile, UploadState } from '../types';
 import { toast } from "sonner";
 
-const API_ENDPOINT = '/upload';
+const API_ENDPOINT = 'https://ocr.anupkhanal.info.np/upload';
 
 export function useOcrProcessor() {
   const [state, setState] = useState<UploadState>({
@@ -12,6 +12,7 @@ export function useOcrProcessor() {
     error: null,
     data: null,
     file: null,
+    uploadProgress: 0
   });
 
   const processFile = async (file: DocumentFile) => {
@@ -20,6 +21,7 @@ export function useOcrProcessor() {
       error: null,
       data: null,
       file,
+      uploadProgress: 0
     });
 
     const formData = new FormData();
@@ -30,6 +32,12 @@ export function useOcrProcessor() {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setState(prev => ({ ...prev, uploadProgress: percentCompleted }));
+          }
+        }
       });
 
       setState({
@@ -37,6 +45,7 @@ export function useOcrProcessor() {
         error: null,
         data: response.data,
         file,
+        uploadProgress: 100
       });
 
       toast.success('Document processed successfully');
@@ -54,6 +63,7 @@ export function useOcrProcessor() {
         error: errorMessage,
         data: null,
         file,
+        uploadProgress: 0
       });
       
       toast.error(errorMessage);
@@ -67,6 +77,7 @@ export function useOcrProcessor() {
       error: null,
       data: null,
       file: null,
+      uploadProgress: 0
     });
   };
 
