@@ -19,7 +19,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
     if (fallbackText) {
       return (
         <div className={`animate-fade-in ${className}`}>
-          <pre className="document-text">{fallbackText}</pre>
+          <pre className="whitespace-pre-wrap font-sans text-slate-700 leading-relaxed">{fallbackText}</pre>
         </div>
       );
     }
@@ -37,7 +37,7 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
   });
 
   return (
-    <div className={`space-y-4 animate-fade-in ${className}`}>
+    <div className={`space-y-6 animate-fade-in ${className}`}>
       {sortedContent.map((item, index) => {
         if (item.type === 'table' && item.headers && item.data) {
           const tableData: TableData = {
@@ -46,15 +46,25 @@ const ContentRenderer: React.FC<ContentRendererProps> = ({
             position: item.position,
           };
           return (
-            <div key={`table-${index}`} className="my-6">
+            <div key={`table-${index}`} className="my-6 rounded-md border-l-4 border-indigo-500 pl-2">
+              <p className="text-xs uppercase tracking-wider text-indigo-700 font-semibold mb-2">
+                Table {item.position?.page ? `(Page ${item.position.page})` : ''}
+              </p>
               <TableRenderer table={tableData} />
             </div>
           );
         } else if (item.type === 'text' && item.content) {
           return (
-            <pre key={`text-${index}`} className="document-text">
-              {item.content}
-            </pre>
+            <div key={`text-${index}`} className="document-text">
+              {item.position?.page && (
+                <div className="text-xs text-indigo-500 mb-1 font-medium">
+                  Page {item.position.page}
+                </div>
+              )}
+              <pre className="whitespace-pre-wrap font-sans text-slate-700 leading-relaxed bg-white p-3 rounded-md border border-gray-100 shadow-sm">
+                {item.content}
+              </pre>
+            </div>
           );
         }
         return null;

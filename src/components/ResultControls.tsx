@@ -90,7 +90,7 @@ const ResultControls: React.FC<ResultControlsProps> = ({ data, onClear }) => {
     <div className="flex flex-wrap gap-2 items-center">
       <button 
         onClick={handleCopy} 
-        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 transition-colors"
+        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border border-blue-200 hover:shadow-md transition-all"
         aria-label="Copy content"
       >
         <Copy className="h-4 w-4 mr-1" />
@@ -99,7 +99,7 @@ const ResultControls: React.FC<ResultControlsProps> = ({ data, onClear }) => {
       
       <button 
         onClick={handleDownload} 
-        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 transition-colors"
+        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-700 border border-indigo-200 hover:shadow-md transition-all"
         aria-label="Download content"
       >
         <Download className="h-4 w-4 mr-1" />
@@ -108,7 +108,7 @@ const ResultControls: React.FC<ResultControlsProps> = ({ data, onClear }) => {
       
       <button 
         onClick={onClear} 
-        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100 transition-colors"
+        className="inline-flex items-center gap-1 px-4 py-2 rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border border-gray-200 hover:shadow-md transition-all"
         aria-label="Clear results"
       >
         <Trash2 className="h-4 w-4 mr-1" />

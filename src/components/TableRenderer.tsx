@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { TableData } from '../types';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
 
 interface TableRendererProps {
   table: TableData;
@@ -13,29 +14,32 @@ const TableRenderer: React.FC<TableRendererProps> = ({ table, className = '' }) 
   }
 
   return (
-    <div className={`overflow-x-auto my-4 rounded-lg border border-border ${className}`}>
-      <table className="ocr-table" aria-label="Extracted table">
-        <thead>
-          <tr>
+    <div className={`overflow-x-auto my-4 rounded-lg border border-indigo-200 shadow-sm bg-white ${className}`}>
+      <Table>
+        <TableHeader className="bg-gradient-to-r from-indigo-50 to-blue-50">
+          <TableRow>
             {table.headers.map((header, index) => (
-              <th key={`header-${index}`} scope="col" className="px-4 py-3">
+              <TableHead key={`header-${index}`} className="px-4 py-3 text-indigo-700 font-medium">
                 {header}
-              </th>
+              </TableHead>
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {table.data.map((row, rowIndex) => (
-            <tr key={`row-${rowIndex}`}>
+            <TableRow 
+              key={`row-${rowIndex}`} 
+              className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-indigo-50/30'}
+            >
               {table.headers.map((header, cellIndex) => (
-                <td key={`cell-${rowIndex}-${cellIndex}`} className="px-4 py-3">
+                <TableCell key={`cell-${rowIndex}-${cellIndex}`} className="px-4 py-3">
                   {row[header] || ''}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 };
