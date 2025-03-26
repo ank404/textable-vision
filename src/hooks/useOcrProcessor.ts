@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { OcrResponse, DocumentFile, UploadState } from '../types';
-import { toast } from '@/components/ui/sonner';
+import { toast } from "sonner";
 
 const API_ENDPOINT = '/upload';
 

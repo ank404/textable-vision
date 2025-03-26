@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Download, Copy, Trash2 } from 'lucide-react';
 import { OcrResponse } from '../types';
-import { toast } from '@/components/ui/sonner';
+import { toast } from "sonner";
 
 interface ResultControlsProps {
   data: OcrResponse | null;
